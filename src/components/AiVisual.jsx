@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-
+ 
 export default function AiVisual() {
   return (
     <div className="relative w-full h-[420px] rounded-2xl bg-[#0b1220] overflow-hidden flex items-center justify-center">
