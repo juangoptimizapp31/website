@@ -85,7 +85,7 @@ const AgendaModal = ({ open, onClose }) => {
               </button>
 
               <a
-                href="https://wa.me/573000000000"
+                href="https://wa.me/573007283879"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
@@ -103,7 +103,7 @@ const AgendaModal = ({ open, onClose }) => {
               </a>
 
               <a
-                href="mailto:contacto@tudominio.com"
+                href="infocomercial@optimizapp.com"
                 className="
                   flex items-center justify-between w-full px-6 py-4
                   rounded-xl bg-[#0f1629] border border-blue-500/30
