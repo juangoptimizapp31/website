@@ -38,7 +38,7 @@ const Navbar = () => {
             <img
               src="https://i.imgur.com/bAdU5VB.png"
               alt="optimizApp Solutions SAS"
-              className="h-14 sm:h-16 lg:h-20 w-auto"
+              className="h-14 sm:h-24 lg:h-28 w-auto"
               style={{ filter: 'drop-shadow(0 0 8px rgba(59,130,246,0.4))' }}
             />
           </div>
