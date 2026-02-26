@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { AlertCircle, TrendingUp, DollarSign, Shield, Zap, Users } from 'lucide-react';
 
-import BackgroundBrand from "./BackgroundBrand";
 const problems = [
   { icon: AlertCircle, title: "Herramientas desconectadas", desc: "Silos de información que frenan decisiones." },
   { icon: TrendingUp, title: "Crecimiento desordenado", desc: "Escalabilidad sin estrategia ni control." },
@@ -28,9 +27,37 @@ const item = {
 const ProblemIdentification = () => {
   return (
     <section className="relative py-32 px-4 overflow-hidden bg-gradient-to-b from-[#060b16] to-[#02050c]">
-      
-      {/* 🔥 Background visual (marca / imagen / patrón) */}
-      <BackgroundBrand />
+
+      {/* 🔤 Marquee de fondo — "optimizApp" scrolling en múltiples filas */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
+        <style>{`
+          @keyframes marquee-left  { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
+          @keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); }    }
+          .ml-fast  { animation: marquee-left  18s linear infinite; }
+          .ml-mid   { animation: marquee-left  26s linear infinite; }
+          .mr-fast  { animation: marquee-right 20s linear infinite; }
+          .mr-mid   { animation: marquee-right 30s linear infinite; }
+        `}</style>
+        {[...Array(14)].map((_, rowIdx) => {
+          const dirs = ['ml-fast', 'mr-mid', 'ml-mid', 'mr-fast'];
+          const cls = dirs[rowIdx % dirs.length];
+          const text = Array(24).fill('optimizApp').join('   ·   ');
+          return (
+            <div
+              key={rowIdx}
+              className="flex whitespace-nowrap"
+              style={{ lineHeight: '2.6rem' }}
+            >
+              <span
+                className={`text-[13px] font-bold tracking-[0.3em] uppercase ${cls}`}
+                style={{ color: 'rgba(59,130,246,0.20)' }}
+              >
+                {text}&nbsp;&nbsp;&nbsp;{text}
+              </span>
+            </div>
+          );
+        })}
+      </div>
 
       {/* overlays decorativos */}
       <div className="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-blue-900/5 to-transparent pointer-events-none" />
@@ -38,7 +65,7 @@ const ProblemIdentification = () => {
 
       {/* contenido principal */}
       <div className="relative z-10 max-w-7xl mx-auto">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -58,7 +85,7 @@ const ProblemIdentification = () => {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"

@@ -55,7 +55,7 @@ const EvaluarModal3 = ({ open, setOpen, onBack, onSubmit }) => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="p-0 max-w-4xl overflow-hidden rounded-2xl border-0">
+      <DialogContent className="p-0 w-full max-w-[340px] max-h-[85vh] overflow-y-auto rounded-2xl border border-slate-200 shadow-2xl">
         <div className="relative bg-white">
           {/* CLOSE */}
           <button
@@ -66,9 +66,9 @@ const EvaluarModal3 = ({ open, setOpen, onBack, onSubmit }) => {
             <X size={22} />
           </button>
 
-          <div className="px-10 pt-10 pb-8">
+          <div className="px-6 pt-6 pb-5">
             {/* TITLE */}
-            <h2 className="text-3xl font-extrabold text-slate-800">
+            <h2 className="text-xl font-extrabold text-slate-800">
               Evalúa tu escenario{" "}
               <span className="font-medium text-slate-500">en pocos pasos</span>
             </h2>
@@ -85,15 +85,15 @@ const EvaluarModal3 = ({ open, setOpen, onBack, onSubmit }) => {
             </div>
 
             {/* MAIN CARD */}
-            <div className="mt-6 grid grid-cols-1 gap-5 rounded-2xl border border-slate-200 bg-slate-50 p-6 md:grid-cols-[1fr_260px]">
+            <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
               {/* LEFT CONTENT */}
               <div>
-                <p className="text-[17px] leading-relaxed text-slate-700">
+                <p className="text-sm leading-relaxed text-slate-700">
                   Proporciona <span className="font-extrabold">detalles adicionales</span>{" "}
                   para personalizar la propuesta a las necesidades de tu negocio:
                 </p>
 
-                <div className="mt-5 space-y-4">
+                <div className="mt-3 space-y-3">
                   <Field label="Número de empleados de tu empresa">
                     <Select
                       value={numEmpleados}
@@ -126,31 +126,19 @@ const EvaluarModal3 = ({ open, setOpen, onBack, onSubmit }) => {
                       value={mensaje}
                       onChange={(e) => setMensaje(e.target.value)}
                       placeholder="Incluye cualquier comentario especial o requerimiento de tu negocio aquí..."
-                      className="h-28 w-full resize-none rounded-xl border border-slate-200 bg-white p-4 text-slate-800 outline-none placeholder:text-slate-400"
+                      className="h-20 w-full resize-none rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-800 outline-none placeholder:text-slate-400"
                     />
                   </Field>
                 </div>
               </div>
-
-              {/* RIGHT HOLOGRAM PANEL */}
-              <div className="relative overflow-hidden rounded-2xl border border-blue-200/60 bg-blue-900/10">
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(59,130,246,0.35),transparent_55%)]" />
-                <img
-                  src={hologramaImg}
-                  alt="Holograma"
-                  className="absolute inset-0 h-full w-full object-cover opacity-95"
-                  draggable="false"
-                />
-                <div className="pointer-events-none absolute inset-0 opacity-30 mix-blend-screen bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.25),transparent_45%),radial-gradient(circle_at_80%_60%,rgba(255,255,255,0.18),transparent_55%)]" />
-              </div>
             </div>
 
             {/* ACTIONS */}
-            <div className="mt-6 flex items-center justify-between gap-4">
+            <div className="mt-4 flex items-center justify-between gap-3">
               <button
                 type="button"
                 onClick={() => onBack?.()}
-                className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-100 px-8 py-3 font-semibold text-slate-700 hover:bg-slate-200"
+                className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-100 px-5 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-200"
               >
                 <ArrowLeft size={18} />
                 Regresar
@@ -159,14 +147,14 @@ const EvaluarModal3 = ({ open, setOpen, onBack, onSubmit }) => {
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="flex min-w-[220px] items-center justify-center gap-2 rounded-xl bg-blue-600 px-10 py-3 font-bold text-white shadow-md hover:bg-blue-700"
+                className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-7 py-2 text-sm font-bold text-white shadow-md hover:bg-blue-700"
               >
                 Enviar <ArrowRight size={18} />
               </button>
             </div>
 
             {/* FOOTER */}
-            <div className="mt-5 flex items-center justify-center gap-6 text-sm font-semibold text-slate-500">
+            <div className="mt-3 flex items-center justify-center gap-4 text-xs font-semibold text-slate-500">
               <span className="flex items-center gap-2">
                 <Clock size={16} /> Toma menos de 3 minutos
               </span>

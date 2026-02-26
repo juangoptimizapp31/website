@@ -1,172 +1,153 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, MessageSquare, Sparkles } from 'lucide-react';
+import { MessageSquare, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useToast } from '@/components/ui/use-toast';
 import EvaluarModal from "@/components/EvaluarModal";
 import EvaluarModal2 from "@/components/EvaluarModal2";
 import EvaluarModal3 from "@/components/EvaluarModal3";
+import HologramHeroBackground from "@/components/HologramHeroBackground";
 
 const Hero = () => {
-  const { toast } = useToast();
   const ref = useRef(null);
   const [step, setStep] = useState(0);
 
-
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end start"]
+    offset: ["start start", "end start"],
   });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  const handleAction = (feature) => {
-    toast({
-      title: "🚧 Feature in development",
-      description: `The '${feature}' feature isn't implemented yet. Request it in the next update! 🚀`,
-    });
-  };
+  // Escucha el botón del Navbar
+  useEffect(() => {
+    const open = () => setStep(1);
+    window.addEventListener("openEvalModal", open);
+    return () => window.removeEventListener("openEvalModal", open);
+  }, []);
 
   return (
-    <section ref={ref} className="relative h-screen flex items-center justify-center overflow-hidden px-4 md:px-8">
-      
-      {/* BACKGROUND */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-600/20 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-indigo-600/20 rounded-full blur-[100px] animate-pulse delay-1000" />
-        <div className="absolute top-[40%] left-[60%] w-[30%] h-[30%] bg-cyan-600/10 rounded-full blur-[80px]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-      </div>
+    <section
+      ref={ref}
+      className="
+        relative w-full overflow-hidden
+        flex items-center justify-end
+        h-screen
+        min-h-[500px]
+        px-4 sm:px-8 lg:px-16
+      "
+    >
+      {/* FONDO a pantalla completa */}
+      <HologramHeroBackground />
 
-      <div className="container relative z-10 grid lg:grid-cols-2 gap-12 items-center pt-20">
-
-        {/* CONTENT */}
-        <motion.div style={{ y, opacity }} className="space-y-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium">
-            <Sparkles className="w-4 h-4" />
-            AI-Driven Cloud Optimization
-          </div>
-
-          <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-            <span className="block text-white">Orden, control y</span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 text-glow">
-              crecimiento
-            </span>
-            <span className="block text-gray-400 text-3xl mt-2">en la nube.</span>
-          </h1>
-
-          <p className="text-xl text-gray-400 max-w-xl">
-            Eliminamos el caos tecnológico con arquitectura inteligente y resultados reales.
-          </p>
-
-          <div className="flex gap-4">
-            <Button
-              onClick={() => setStep(1)}
-              size="lg"
-              className="bg-blue-600 hover:bg-blue-500 px-8 h-14 rounded-xl shadow-xl"
-            >
-              Evaluar mi escenario <ArrowRight className="ml-2" />
-            </Button>
-
-            <Button
-              variant="outline"
-              size="lg"
-              className="h-14 px-8 rounded-xl bg-white/5 border-white/10"
-            >
-              <MessageSquare className="mr-2" /> Hablar con experto
-            </Button>
-          </div>
-        </motion.div>
-
-        {/* VISUAL */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
-          className="hidden lg:block"
+      {/* ── Panel (visible en todos los tamaños) ──────────────── */}
+      <motion.div
+        style={{ y, opacity }}
+        initial={{ opacity: 0, scale: 0.92 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.9 }}
+        className="relative z-10 w-full sm:w-auto"
+      >
+        {/*
+          Tamaños del panel por breakpoint:
+          - mobile  : ancho 100%, posicionado abajo-centro
+          - sm/md   : ancho fijo 340px
+          - lg+     : ancho fijo 380px
+        */}
+        <div
+          className="
+            relative
+            w-full sm:w-[340px] lg:w-[380px]
+            mx-auto sm:mx-0
+          "
         >
-          <div className="relative w-full max-w-[560px] mx-auto aspect-square">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 blur-3xl rounded-full" />
+          {/* Glow exterior */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 blur-3xl rounded-full pointer-events-none" />
 
-            <div className="
-              relative z-10 w-full h-full 
-              rounded-[32px] 
-              overflow-hidden 
-              flex items-center justify-center p-6
+          {/* Panel glass */}
+          <div
+            className="
+              relative z-10 w-full
+              rounded-2xl lg:rounded-[28px]
+              overflow-hidden
+              flex flex-col
+              pt-14 pb-5 px-4 sm:px-5 lg:px-6
               bg-[#0b1222]/70
               backdrop-blur-2xl
-              shadow-[0_30px_60px_-10px_rgba(59,130,246,0.5),0_0_40px_rgba(59,130,246,0.3)]
-              transform-gpu transition-transform duration-700 hover:-translate-y-4
-              before:absolute before:inset-0 
-              before:rounded-[32px]
-              before:p-[1px]
-              before:bg-gradient-to-br 
-              before:from-white/10 
-              before:via-transparent 
-              before:to-blue-500/10
-              before:opacity-40
-              before:pointer-events-none
-            ">
-              
-              <img
-                src="https://i.imgur.com/q9EVOwh.png"
-                alt="Optimizapp Cloud Dashboard"
-                className="w-full h-full object-cover opacity-70 hover:opacity-90 transition-opacity duration-700"
-              />
+              shadow-[0_20px_50px_-10px_rgba(59,130,246,0.5),0_0_30px_rgba(59,130,246,0.25)]
+              transform-gpu hover:-translate-y-2 transition-transform duration-500
+            "
+          >
+            {/* System Optimal badge */}
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="absolute top-3 right-3 bg-[#0f1629]/90 px-2.5 py-1 rounded-xl border border-white/10 shadow-xl"
+            >
+              <span className="text-xs sm:text-sm text-green-400">● System Optimal</span>
+            </motion.div>
 
-              <motion.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                className="absolute top-6 right-6 bg-[#0f1629]/90 px-4 py-2 rounded-xl border border-white/10 shadow-xl"
+            {/* Contenido */}
+            <div className="space-y-3 sm:space-y-4">
+
+              {/* Badge */}
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs sm:text-sm font-medium">
+                <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
+                AI-Driven Cloud Optimization
+              </div>
+
+              {/* Título */}
+              <h1 className="font-bold leading-tight">
+                <span className="block text-white text-2xl sm:text-3xl lg:text-4xl">Orden, control y</span>
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 text-2xl sm:text-3xl lg:text-4xl">
+                  crecimiento
+                </span>
+                <span className="block text-gray-400 text-base sm:text-lg lg:text-xl mt-1">en la nube.</span>
+              </h1>
+
+              {/* Descripción */}
+              <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                Eliminamos el caos tecnológico con arquitectura inteligente y resultados reales.
+              </p>
+
+              {/* Botón dentro del panel */}
+              <Button
+                variant="outline"
+                size="default"
+                className="w-full rounded-xl bg-white/5 border-white/20 text-white hover:bg-white/10 text-sm"
               >
-                <span className="text-sm text-green-400">● System Optimal</span>
-              </motion.div>
+                <MessageSquare className="mr-2 w-4 h-4" />
+                Hablar con experto
+              </Button>
 
-              <motion.div
-                animate={{ y: [0, 20, 0] }}
-                transition={{ duration: 5, repeat: Infinity }}
-                className="absolute bottom-6 left-6 bg-[#0f1629]/90 px-4 py-3 rounded-xl border border-white/10 shadow-xl"
+              {/* Botón evaluar — solo visible en mobile donde navbar no tiene botón */}
+              <Button
+                onClick={() => setStep(1)}
+                className="sm:hidden w-full rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold text-sm"
               >
-                <span className="text-xs text-gray-400">Cloud Efficiency</span>
-                <div className="w-32 h-1 bg-gray-700 rounded-full mt-1">
-                  <div className="h-full w-[94%] bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full" />
-                </div>
-              </motion.div>
-
+                Evaluar mi escenario
+              </Button>
             </div>
           </div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
 
-      {/* PASO 1 */}
+      {/* ── Modales ─────────────────────────────────────────── */}
       <EvaluarModal
         open={step === 1}
         setOpen={(v) => !v && setStep(0)}
-        onNext={(dataPaso1) => {
-          console.log("Paso 1:", dataPaso1);
-          setStep(2);
-        }}
+        onNext={(d) => { console.log("Paso 1:", d); setStep(2); }}
       />
-
-      {/* PASO 2 */}
       <EvaluarModal2
         open={step === 2}
         setOpen={(v) => !v && setStep(0)}
         onBack={() => setStep(1)}
-        onNext={(dataPaso2) => {
-          console.log("Paso 2:", dataPaso2);
-          setStep(3); // luego harás el paso 3
-        }}
+        onNext={(d) => { console.log("Paso 2:", d); setStep(3); }}
       />
       <EvaluarModal3
         open={step === 3}
         setOpen={(v) => !v && setStep(0)}
         onBack={() => setStep(2)}
-        onSubmit={(dataPaso3) => {
-          console.log("Paso 3:", dataPaso3);
-          setStep(0); // cerrar todo
-        }}
+        onSubmit={(d) => { console.log("Paso 3:", d); setStep(0); }}
       />
     </section>
   );

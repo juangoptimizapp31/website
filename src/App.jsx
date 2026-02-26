@@ -31,14 +31,16 @@ function App() {
       <Navbar />
 
       {/* CONTENIDO */}
-      <main className="relative min-h-screen bg-[#030711] text-white selection:bg-blue-500/30 selection:text-blue-200 pt-24">
-        
+      <main className="relative min-h-screen bg-[#030711] text-white selection:bg-blue-500/30 selection:text-blue-200 overflow-x-hidden">
+
+        {/* HERO — full bleed, sin padding arriba */}
         <section id="inicio">
           <Hero />
         </section>
 
-        <div className="relative z-10 space-y-0">
-          
+        {/* WRAPPER GLOBAL RESPONSIVE (resto de secciones) */}
+        <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10 lg:px-16">
+
           <section id="problema">
             <ProblemIdentification />
           </section>

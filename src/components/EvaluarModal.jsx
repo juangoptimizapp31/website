@@ -31,7 +31,7 @@ const EvaluarModal = ({ open, setOpen, onNext }) => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="p-0 w-[820px] max-w-[92vw] overflow-hidden rounded-2xl border border-slate-200 shadow-2xl">
+      <DialogContent className="p-0 w-full max-w-xs max-h-[85vh] overflow-y-auto rounded-2xl border border-slate-200 shadow-2xl">
         {/* WRAP */}
         <div className="relative bg-white">
           {/* CLOSE */}
@@ -44,8 +44,8 @@ const EvaluarModal = ({ open, setOpen, onNext }) => {
           </button>
 
           {/* HEADER */}
-          <div className="px-10 pt-10">
-            <h2 className="text-3xl font-extrabold text-slate-800">
+          <div className="px-6 pt-6">
+            <h2 className="text-xl font-extrabold text-slate-800">
               Evalúa tu escenario{" "}
               <span className="font-medium text-slate-500">en pocos pasos</span>
             </h2>
@@ -63,9 +63,9 @@ const EvaluarModal = ({ open, setOpen, onNext }) => {
             </div>
 
             {/* BANNER */}
-            <div className="mt-5 relative h-[220px] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
+            <div className="mt-4 relative h-[130px] w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
               {/* LEFT (banner image) */}
-              <div className="absolute inset-y-3 left-3 right-[210px] overflow-hidden rounded-xl border border-slate-200 bg-white">
+              <div className="absolute inset-y-2 left-2 right-[150px] overflow-hidden rounded-xl border border-slate-200 bg-white">
                 <img
                   src={bannerImg}
                   alt="Banner"
@@ -75,7 +75,7 @@ const EvaluarModal = ({ open, setOpen, onNext }) => {
               </div>
 
               {/* RIGHT (hologram panel) */}
-              <div className="absolute inset-y-3 right-3 w-[190px] overflow-hidden rounded-2xl border border-blue-200/60 bg-blue-900/10">
+              <div className="absolute inset-y-2 right-2 w-[140px] overflow-hidden rounded-xl border border-blue-200/60 bg-blue-900/10">
                 {/* glow */}
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(59,130,246,0.35),transparent_55%)]" />
 
@@ -93,7 +93,7 @@ const EvaluarModal = ({ open, setOpen, onNext }) => {
             </div>
 
             {/* DESCRIPTION */}
-            <p className="mt-6 text-[17px] leading-relaxed text-slate-600">
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
               <span className="font-bold text-slate-800">Cuéntanos</span> sobre
               tu negocio para{" "}
               <span className="font-bold text-slate-800">
@@ -104,7 +104,7 @@ const EvaluarModal = ({ open, setOpen, onNext }) => {
             </p>
 
             {/* FORM */}
-            <form onSubmit={handleSubmit} className="mt-5 space-y-3 pb-8">
+            <form onSubmit={handleSubmit} className="mt-3 space-y-2 pb-5">
               <InputRow icon={<User size={18} />} name="nombre" placeholder="Nombre" />
               <InputRow icon={<Mail size={18} />} name="email" placeholder="Email" type="email" />
               <InputRow
@@ -123,21 +123,21 @@ const EvaluarModal = ({ open, setOpen, onNext }) => {
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="rounded-xl border border-slate-200 bg-slate-100 px-8 py-3 font-semibold text-slate-700 hover:bg-slate-200"
+                  className="rounded-xl border border-slate-200 bg-slate-100 px-5 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-200"
                 >
                   Cancelar
                 </button>
 
                 <button
                   type="submit"
-                  className="flex min-w-[220px] items-center justify-center gap-2 rounded-xl bg-blue-600 px-10 py-3 font-bold text-white shadow-md hover:bg-blue-700"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-7 py-2 text-sm font-bold text-white shadow-md hover:bg-blue-700"
                 >
                   Siguiente <ArrowRight size={18} />
                 </button>
               </div>
 
               {/* FOOTER HINTS */}
-              <div className="mt-5 flex items-center justify-center gap-6 text-sm font-semibold text-slate-500">
+              <div className="mt-3 flex items-center justify-center gap-4 text-xs font-semibold text-slate-500">
                 <span className="flex items-center gap-2">
                   <Clock size={16} /> Toma menos de 3 minutos
                 </span>
