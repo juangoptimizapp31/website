@@ -6,7 +6,6 @@ import Navbar from "@/components/Navbar";
 import Hero from '@/components/Hero';
 import ProblemIdentification from '@/components/ProblemIdentification';
 import ValueProposition from '@/components/ValueProposition';
-import CoreServices from '@/components/CoreServices';
 import WhatYouGet from '@/components/WhatYouGet';
 import ProofTrust from '@/components/ProofTrust';
 import ServicesCatalog from '@/components/ServicesCatalog';
@@ -38,19 +37,16 @@ function App() {
           <Hero />
         </section>
 
+        {/* SECCIÓN PROBLEMA — full bleed para que el marquee llegue de extremo a extremo */}
+        <section id="problema">
+          <ProblemIdentification />
+        </section>
+
         {/* WRAPPER GLOBAL RESPONSIVE (resto de secciones) */}
         <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10 lg:px-16">
 
-          <section id="problema">
-            <ProblemIdentification />
-          </section>
-
           <section id="propuesta">
             <ValueProposition />
-          </section>
-
-          <section id="servicios">
-            <CoreServices />
           </section>
 
           <section id="beneficios">

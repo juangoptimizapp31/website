@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Target, Gauge, TrendingUp, BarChart3, Activity } from 'lucide-react';
 
 const ValueProposition = () => {
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    const autoPlay = () => {
+      if (window.innerWidth >= 640) return; // Solo en móvil (sm breakpoint)
+
+      const { scrollLeft, offsetWidth, scrollWidth } = scrollContainer;
+      const isAtEnd = scrollLeft + offsetWidth >= scrollWidth - 10;
+      const nextScroll = isAtEnd ? 0 : scrollLeft + offsetWidth;
+      
+      scrollContainer.scrollTo({
+        left: nextScroll,
+        behavior: 'smooth'
+      });
+    };
+
+    const interval = setInterval(autoPlay, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="py-24 px-4 bg-[#030711] relative overflow-hidden">
       {/* Background Glows */}
@@ -20,7 +43,10 @@ const ValueProposition = () => {
           </motion.h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div 
+          ref={scrollRef}
+          className="flex flex-row flex-nowrap overflow-x-auto snap-x snap-mandatory no-scrollbar gap-6 pb-12 px-4 -mx-4 sm:grid sm:grid-cols-3 sm:gap-8 sm:overflow-visible sm:px-0 sm:mx-0 sm:pb-0"
+        >
           {/* Card 1: Ahorro y Control */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -28,6 +54,7 @@ const ValueProposition = () => {
             viewport={{ once: true }}
             transition={{ delay: 0 }}
             className="
+            snap-center flex-shrink-0 w-[85vw] sm:w-full
             glass-card rounded-3xl p-8 relative overflow-hidden group
             transition-all duration-500
             shadow-[0_20px_60px_rgba(0,0,0,0.6)]
@@ -75,6 +102,7 @@ const ValueProposition = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="
+            snap-center flex-shrink-0 w-[85vw] sm:w-full
             glass-card rounded-3xl p-8 relative overflow-hidden group
             transition-all duration-500
             shadow-[0_20px_60px_rgba(0,0,0,0.6)]
@@ -119,6 +147,7 @@ const ValueProposition = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
             className="
+            snap-center flex-shrink-0 w-[85vw] sm:w-full
             glass-card rounded-3xl p-8 relative overflow-hidden group
             transition-all duration-500
             shadow-[0_20px_60px_rgba(0,0,0,0.6)]

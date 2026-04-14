@@ -2,7 +2,7 @@ const Home = () => {
   return (
     <div className="w-full overflow-x-hidden">
       <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10 lg:px-16">
-         
+        
         <section id="inicio">
           <Hero />
         </section>

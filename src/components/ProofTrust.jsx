@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 const ProofTrust = () => {
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    const autoPlay = () => {
+      if (window.innerWidth >= 640) return; // Solo en móvil (sm breakpoint)
+
+      const { scrollLeft, offsetWidth, scrollWidth } = scrollContainer;
+      const isAtEnd = scrollLeft + offsetWidth >= scrollWidth - 10;
+      const nextScroll = isAtEnd ? 0 : scrollLeft + offsetWidth;
+      
+      scrollContainer.scrollTo({
+        left: nextScroll,
+        behavior: 'smooth'
+      });
+    };
+
+    const interval = setInterval(autoPlay, 4500); // Un poco mas lento para lectura de métricas
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="py-24 px-4 bg-[#050914] border-t border-white/5">
       <div className="container max-w-6xl mx-auto text-center">
@@ -15,9 +38,12 @@ const ProofTrust = () => {
           <span className="text-blue-500">Resultados medibles.</span>
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div 
+          ref={scrollRef}
+          className="flex flex-row flex-nowrap overflow-x-auto snap-x snap-mandatory no-scrollbar gap-6 pb-12 px-4 -mx-4 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 sm:overflow-visible sm:px-0 sm:mx-0 sm:pb-0"
+        >
           {/* Card 1 */}
-          <div className="bg-[#0f1629] p-6 rounded-2xl border border-white/5 relative group overflow-hidden">
+          <div className="snap-center flex-shrink-0 w-[80vw] sm:w-full bg-[#0f1629] p-6 rounded-2xl border border-white/5 relative group overflow-hidden">
              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
              <div className="text-5xl font-bold text-white mb-2 font-mono">40%</div>
              <p className="text-gray-400 text-sm">Reducción de costos Cloud</p>
@@ -31,7 +57,7 @@ const ProofTrust = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="bg-[#0f1629] p-6 rounded-2xl border border-white/5 relative group overflow-hidden">
+          <div className="snap-center flex-shrink-0 w-[80vw] sm:w-full bg-[#0f1629] p-6 rounded-2xl border border-white/5 relative group overflow-hidden">
              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
              <div className="text-5xl font-bold text-white mb-2 font-mono">3x</div>
              <p className="text-gray-400 text-sm">Velocidad de deploy</p>
@@ -46,7 +72,7 @@ const ProofTrust = () => {
           </div>
 
           {/* Card 3 */}
-          <div className="bg-[#0f1629] p-6 rounded-2xl border border-white/5 relative group overflow-hidden">
+          <div className="snap-center flex-shrink-0 w-[80vw] sm:w-full bg-[#0f1629] p-6 rounded-2xl border border-white/5 relative group overflow-hidden">
              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
              <div className="text-5xl font-bold text-white mb-2 font-mono">99.9%</div>
              <p className="text-gray-400 text-sm">Uptime garantizado</p>
@@ -57,7 +83,7 @@ const ProofTrust = () => {
           </div>
 
           {/* Card 4 */}
-          <div className="bg-[#0f1629] p-6 rounded-2xl border border-white/5 relative group overflow-hidden">
+          <div className="snap-center flex-shrink-0 w-[80vw] sm:w-full bg-[#0f1629] p-6 rounded-2xl border border-white/5 relative group overflow-hidden">
              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
              <div className="text-5xl font-bold text-white mb-2 font-mono">24/7</div>
              <p className="text-gray-400 text-sm">Soporte experto</p>
